@@ -82,7 +82,7 @@ export default function Page() {
       if (!sdp) throw new Error("No localDescription SDP");
 
       const answerResp = await fetch(
-        "https://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview",
+        "https://api.openai.com/v1/realtime?model=gpt-realtime-2025-08-28",
         {
           method: "POST",
           headers: {

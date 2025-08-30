@@ -5,7 +5,7 @@ A minimal Next.js app that streams your microphone to OpenAI Realtime and plays 
 ## Features
 - WebRTC mic input + remote audio playback
 - Server‑minted ephemeral keys (short‑lived `ek_…`) via Next.js API
-- Works with `gpt-4o-realtime-preview` and selectable voice (default: `verse`)
+- Works with `gpt-realtime-2025-08-28` and selectable voice (default: `verse`)
 
 ## Quick Start
 
@@ -32,7 +32,7 @@ Build (production)
 - Server: `pages/api/realtime/ephemeral.ts` mints a short‑lived ephemeral key by calling `POST https://api.openai.com/v1/realtime/sessions` with your `OPENAI_API_KEY` and returns `{ ephemeralKey: ek_... }` to the client.
 
 ## Configuration
-- Model: `gpt-4o-realtime-preview`
+- Model: `gpt-realtime-2025-08-28`
 - Voice: `verse`
 - You can change these in `pages/api/realtime/ephemeral.ts` (when minting) or adjust the client request in `app/page.tsx`.
 

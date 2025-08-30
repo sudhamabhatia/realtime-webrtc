@@ -24,7 +24,7 @@ export default async function handler(
         "OpenAI-Beta": "realtime=v1",
       },
       body: JSON.stringify({
-        model: "gpt-4o-realtime-preview",
+        model: "gpt-realtime-2025-08-28",
         voice: "verse",
       }),
     });
