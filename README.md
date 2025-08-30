@@ -61,8 +61,8 @@ If this helps, a star is appreciated! 🚀
 
 ## Deploy to Vercel
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=<REPO_URL>&env=OPENAI_API_KEY&envDescription=Your%20OpenAI%20API%20Key%20(sk-...)&project-name=realtime-webrtc&repository-name=realtime-webrtc)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/sudhamabhatia/realtime-webrtc&env=OPENAI_API_KEY&envDescription=Your%20OpenAI%20API%20Key%20(sk-...)&project-name=realtime-webrtc&repository-name=realtime-webrtc)
 
-- Replace `<REPO_URL>` in the button link with your public GitHub repo URL after you open source it.
+- Click the button to clone and deploy from this repo in your Vercel account.
 - During deployment, set `OPENAI_API_KEY` in Project → Settings → Environment Variables.
 - Vercel auto-detects Next.js (`next build`/`next start`). `.nvmrc` and `engines` request Node 22 for consistency.
