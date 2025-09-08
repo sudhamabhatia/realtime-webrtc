@@ -37,8 +37,8 @@ export default function Page() {
 
       const res = await fetch("/api/realtime/ephemeral", { method: "POST" });
       if (!res.ok) throw new Error(await res.text());
-      const data: EphemeralResp = await res.json();
-      const ek = data?.ephemeralKey;
+      const data: any = await res.json();
+      const ek: string | undefined = data?.ephemeralKey || data?.value;
       if (!ek || !ek.startsWith("ek_")) {
         throw new Error("Server did not return a valid ephemeral key");
       }
@@ -63,6 +63,17 @@ export default function Page() {
       // Let the model send us audio back
       pc.addTransceiver("audio", { direction: "recvonly" });
 
+      // Data channel for sending/receiving events
+      const dc = pc.createDataChannel("oai-events");
+      dc.addEventListener("open", () => console.log("datachannel open"));
+      dc.addEventListener("message", (e) => {
+        try {
+          console.log("oai event:", JSON.parse(e.data));
+        } catch {
+          console.log("oai event (raw):", e.data);
+        }
+      });
+
       const offer = await pc.createOffer();
       await pc.setLocalDescription(offer);
 
@@ -82,14 +93,13 @@ export default function Page() {
       if (!sdp) throw new Error("No localDescription SDP");
 
       const answerResp = await fetch(
-        "https://api.openai.com/v1/realtime?model=gpt-realtime-2025-08-28",
+        "https://api.openai.com/v1/realtime/calls?model=gpt-realtime-2025-08-28",
         {
           method: "POST",
           headers: {
             Authorization: `Bearer ${ek}`,
             "Content-Type": "application/sdp",
             Accept: "application/sdp",
-            "OpenAI-Beta": "realtime=v1",
           },
           body: sdp,
         }

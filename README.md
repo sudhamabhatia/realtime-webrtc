@@ -5,7 +5,7 @@ A minimal Next.js app that streams your microphone to OpenAI Realtime and plays 
 ## Features
 - WebRTC mic input + remote audio playback
 - Server‑minted ephemeral keys (short‑lived `ek_…`) via Next.js API
-- Works with `gpt-realtime-2025-08-28` and selectable voice (default: `verse`)
+- Works with `gpt-realtime-2025-08-28` and selectable voice (default: `marin`)
 
 ## Quick Start
 
@@ -28,8 +28,8 @@ Build (production)
 - `npm run build && npm start`
 
 ## How It Works
-- Client: `app/page.tsx` creates an `RTCPeerConnection`, gathers ICE, and POSTs the SDP `offer` to the Realtime endpoint with `Accept: application/sdp` and `OpenAI-Beta: realtime=v1`. The returned SDP `answer` is applied as the remote description, enabling bi‑directional audio.
-- Server: `pages/api/realtime/ephemeral.ts` mints a short‑lived ephemeral key by calling `POST https://api.openai.com/v1/realtime/sessions` with your `OPENAI_API_KEY` and returns `{ ephemeralKey: ek_... }` to the client.
+- Client: `app/page.tsx` creates an `RTCPeerConnection`, gathers ICE, and POSTs the SDP `offer` to `https://api.openai.com/v1/realtime/calls?model=gpt-realtime-2025-08-28` with `Content-Type: application/sdp`. The returned SDP `answer` is applied as the remote description, enabling bi‑directional audio.
+- Server: `pages/api/realtime/ephemeral.ts` mints a short‑lived ephemeral key by calling `POST https://api.openai.com/v1/realtime/client_secrets` with your `OPENAI_API_KEY` and returns `{ ephemeralKey: ek_... }` to the client.
 
 ## Configuration
 - Model: `gpt-realtime-2025-08-28`
